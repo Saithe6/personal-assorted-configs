@@ -30,17 +30,15 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
+# exec xset s 600
+exec --no-startup-id xss-lock --transfer-sleep-lock i3lock --nofork --i /home/luci/Pictures/Wallpapers/tux-lock.png -t
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
 exec --no-startup-id nitrogen --restore &
 
-# exec --no-startup-id i3-msg 'workspace audio; exec gnome-terminal -e 'bluetoothstartup'; workspace 1'
 exec --no-startup-id easyeffects --gapplication-service
-# bindsym $mod+o exec --no-startup-id easyeffects --gapplication-service
 assign [class = "^easyeffects"] "audio"
 
 # Use pactl to adjust volume in PulseAudio.
@@ -49,7 +47,10 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-# bindsym XF86AudioPause exec --no-startup-id pactl 
+
+exec --no-startup-id playerctld daemon
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -195,7 +196,8 @@ set $cTertiary #0C0C0C
 set $cHighlight #399C55
 set $cText #C3C4C7
 set $cText2 #6C6D6F
-bindsym $mod+d exec --no-startup-id "dmenu_run -nf '$cText' -nb '$cTertiary' -sb '$cHighlight' -sf '$cText' -fn 'monospace-10'"
+bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '$cText' -nb '$cTertiary' -sb '$cHighlight' -sf '$cText' -fn 'monospace-10'"
+bindsym $mod+d exec --no-startup-id "rofi -show drun"
 # class                 border  bground text    indicator child_border
 client.focused          $cHighlight $cPrimary $cText $cPrimary $cHighlight
 client.focused_inactive $cHighlight $cSecondary $cText $cSecondary   $cPrimary
