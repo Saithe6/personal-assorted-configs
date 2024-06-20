@@ -31,7 +31,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec xset s 600
-exec --no-startup-id xss-lock --transfer-sleep-lock i3lock --nofork --i /home/luci/Pictures/Wallpapers/tux-lock.png -t
+exec --no-startup-id xss-lock --transfer-sleep-lock i3lock --nofork --i /home/luci/Pictures/Wallpapers/tux-lock.png
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
@@ -190,37 +190,40 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 bindsym $mod+b bar mode toggle
 
-set $cPrimary #202020
-set $cSecondary #161616
-set $cTertiary #0C0C0C
-set $cHighlight #399C55
-set $cText #C3C4C7
-set $cText2 #6C6D6F
-bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '$cText' -nb '$cTertiary' -sb '$cHighlight' -sf '$cText' -fn 'monospace-10'"
 bindsym $mod+d exec --no-startup-id "rofi -show drun"
-# class                 border  bground text    indicator child_border
-client.focused          $cHighlight $cPrimary $cText $cPrimary $cHighlight
-client.focused_inactive $cHighlight $cSecondary $cText $cSecondary   $cPrimary
-client.unfocused        $cSecondary $cSecondary $cText2 $cSecondary   $cPrimary
-client.urgent           $cHighlight $cHighlight $cText $cHighlight $cHighlight
-client.placeholder      $cHighlight $cSecondary $cText $cSecondary   $cHighlight
 
-client.background       $cTertiary
+include purple.conf
 
-bar {
-  position bottom
-  mode dock
-  # modifier none
-  status_command i3status
-  colors {
-    background $cTertiary
-    statusline $cText
-    separator  $cHighlight
-
-    focused_workspace  $cHighlight $cPrimary $cText
-    active_workspace   $cSecondary $cSecondary $cText
-    inactive_workspace $cSecondary $cSecondary $cText2
-    urgent_workspace   $cHighlight $cHighlight $cText
-    binding_mode       $cHighlight $cHighlight $cText
-  }
-}
+# set $cPrimary #0c0c0c
+# set $cSecondary #161616
+# set $cTertiary #0C0C0C
+# set $cHighlight #399C55
+# set $cText #C3C4C7
+# set $cText2 #6C6D6F
+# bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '$cText' -nb '$cTertiary' -sb '$cHighlight' -sf '$cText' -fn 'monospace-10'"
+# # class                 border  bground text    indicator child_border
+# client.focused          $cHighlight $cPrimary $cText $cPrimary $cHighlight
+# client.focused_inactive $cHighlight $cSecondary $cText $cSecondary   $cPrimary
+# client.unfocused        $cSecondary $cSecondary $cText2 $cSecondary   $cPrimary
+# client.urgent           $cHighlight $cHighlight $cText $cHighlight $cHighlight
+# client.placeholder      $cHighlight $cSecondary $cText $cSecondary   $cHighlight
+#
+# client.background       $cTertiary
+#
+# bar {
+#   position bottom
+#   mode dock
+#   # modifier none
+#   status_command i3status
+#   colors {
+#     background $cTertiary
+#     statusline $cText
+#     separator  $cHighlight
+#
+#     focused_workspace  $cHighlight $cPrimary $cText
+#     active_workspace   $cSecondary $cSecondary $cText
+#     inactive_workspace $cSecondary $cSecondary $cText2
+#     urgent_workspace   $cHighlight $cHighlight $cText
+#     binding_mode       $cHighlight $cHighlight $cText
+#   }
+# }
